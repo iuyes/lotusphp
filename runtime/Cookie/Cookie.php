@@ -159,21 +159,22 @@ class LtCookie
 	 * @param string $path
 	 * @param string $domain
 	 * @param int $secure
+	 * @param boolean $httpOnly
 	 */
-	public function setCookie($name, $value = '', $expire = null, $path = '/', $domain = null, $secure = 0)
+	public function setCookie($name, $value = '', $expire = null, $path = '/', $domain = null, $secure = 0, $httpOnly = true)
 	{
 		if (is_array($value))
 		{
 			foreach($value as $k => $v)
 			{
 				$v = $this->encrypt($v);
-				setcookie($name . '[' . $k . ']', $v, $expire, $path, $domain, $secure);
+				setcookie($name . '[' . $k . ']', $v, $expire, $path, $domain, $secure, $httpOnly);
 			}
 		}
 		else
 		{
 			$value = $this->encrypt($value);
-			setcookie($name, $value, $expire, $path, $domain, $secure);
+			setcookie($name, $value, $expire, $path, $domain, $secure, $httpOnly);
 		}
 	}
 }
